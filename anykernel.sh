@@ -3,7 +3,7 @@
 
 ## AnyKernel setup
 # EDIFY properties
-kernel.string=Render Kernel by RenderBroken!
+kernel.string=Genei Kernel by Raagh!
 do.devicecheck=1
 do.initd=1
 do.modules=1
@@ -155,9 +155,6 @@ dump_boot;
 cp -fp $patch/init.d/* $initd
 chmod -R 766 $initd
 
-# mpdecsion binary
-mv $bindir/mpdecision-rm $bindir/mpdecision
-
 # adb secure
 backup_file default.prop;
 replace_string default.prop "ro.adb.secure=0" "ro.adb.secure=1" "ro.adb.secure=0";
@@ -165,27 +162,7 @@ replace_string default.prop "ro.secure=0" "ro.secure=1" "ro.secure=0";
 
 # init.bacon.rc
 backup_file init.bacon.rc;
-append_file init.bacon.rc "render-post_boot" init.bacon.patch;
-
-# panel and gamma
-backup_file init.qcom-common.rc
-replace_line init.qcom-common.rc "chown system graphics /sys/devices/virtual/graphics/fb0/panel_calibration" "    chown system system /sys/devices/virtual/graphics/fb0/panel_calibration";
-
-# Disable QCOM Thermal Driver
-insert_line init.qcom-common.rc "#Disable QCOM Thermal" after "service thermal-engine /system/bin/thermal-engine" "   #Disable QCOM Thermal\n   disabled\n"
-
-# add frandom compatibility
-backup_file ueventd.rc;
-insert_line ueventd.rc "frandom" after "urandom" "/dev/frandom              0666   root       root\n";
-insert_line ueventd.rc "erandom" after "urandom" "/dev/erandom              0666   root       root\n";
-
-backup_file file_contexts;
-insert_line file_contexts "frandom" after "urandom" "/dev/frandom				u:object_r:frandom_device:s0\n";
-insert_line file_contexts "erandom" after "urandom" "/dev/erandom				u:object_r:erandom_device:s0\n";
-
-# Add F2FS Support for /data and /cache since its can be used on ANY rom
-backup_file fstab.bacon
-replace_file fstab.bacon 750 fstab.bacon;
+append_file init.bacon.rc "genei-post_boot" init.bacon.patch;
 
 # xPrivacy
 # Thanks to @Shadowghoster & @@laufersteppenwolf

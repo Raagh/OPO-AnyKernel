@@ -1,7 +1,7 @@
 show_progress(1.34, 4);
 ui_print(" ");
 ui_print(" ");
-ui_print(" RenderBroken's Custom Kernel");
+ui_print(" Raagh's Custom Kernel");
 ui_print("    for the Oneplus One!    ");
 ui_print(" ");
 ui_print(" ");
@@ -50,7 +50,7 @@ delete("/system/etc/init.d/01mpdecision");
 delete("/system/etc/init.d/00tgm");
 delete("/system/etc/init.d/00RenderKernel");
 delete("/system/etc/init.d/00ak");
-delete("/sbin/init.render.post_boot.sh");
+delete("/sbin/init.genei.post_boot.sh");
 unmount("/system");
 ui_print(" ");
 ui_print("Done!");
